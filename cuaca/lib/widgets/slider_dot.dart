@@ -12,10 +12,10 @@ class SliderDot extends StatelessWidget {
       width: isActive ? 12 : 5,
       height: 5,
       decoration: BoxDecoration(
-        color: isActive ? Colors.white : Colors.white54,
-        borderRadius: BorderRadius.all(
-          Radius.circular(5),
-        ),
+        color: Theme.of(context).brightness == Brightness.light
+            ? Colors.black
+            : Colors.white,
+        borderRadius: BorderRadius.all(Radius.circular(5)),
       ),
     );
   }

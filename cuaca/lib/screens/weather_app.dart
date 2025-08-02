@@ -3,8 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../models/weather_locations.dart';
 import '../widgets/single_weather.dart';
 import '../widgets/slider_dot.dart';
+import '../widgets/search.dart';
 
 class WeatherApp extends StatefulWidget {
+  final bool isDarkTheme;
+  final VoidCallback toggleTheme;
+
+  const WeatherApp({
+    Key? key,
+    required this.isDarkTheme,
+    required this.toggleTheme,
+  }) : super(key: key);
+
   @override
   _WeatherAppState createState() => _WeatherAppState();
 }
@@ -12,7 +22,6 @@ class WeatherApp extends StatefulWidget {
 class _WeatherAppState extends State<WeatherApp> {
   int _currentPage = 0;
   final PageController _pageController = PageController(viewportFraction: 0.8);
-  bool isDarkTheme = true;
 
   String _getBackgroundImage(String weatherType) {
     switch (weatherType) {
@@ -44,36 +53,44 @@ class _WeatherAppState extends State<WeatherApp> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(''),
+        title: const Text(''),
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.search, size: 30, color: Colors.white),
+          icon: Icon(
+            Icons.search,
+            size: 30,
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.black
+                : Colors.white,
+          ),
+          onPressed: () async {
+            final result = await showSearch(
+              context: context,
+              delegate: Search(),
+            );
+            if (result != null) {
+              final index = locationList.indexWhere(
+                (loc) => loc.city == result,
+              );
+              if (index != -1) {
+                setState(() {
+                  _currentPage = index;
+                  _pageController.jumpToPage(index);
+                });
+              }
+            }
+          },
         ),
         actions: [
           IconButton(
             icon: Icon(
-              isDarkTheme ? Icons.light_mode : Icons.dark_mode,
-              color: Colors.white,
+              widget.isDarkTheme ? Icons.light_mode : Icons.dark_mode,
+              color: Theme.of(context).brightness == Brightness.light
+                  ? Colors.black
+                  : Colors.white,
             ),
-            onPressed: () {
-              setState(() {
-                isDarkTheme = !isDarkTheme;
-              });
-            },
-          ),
-          Container(
-            margin: EdgeInsets.only(right: 20),
-            child: GestureDetector(
-              onTap: () => print('Menu Clicked!'),
-              child: SvgPicture.asset(
-                'assets/menu.svg',
-                height: 30,
-                width: 30,
-                color: Colors.white,
-              ),
-            ),
+            onPressed: widget.toggleTheme,
           ),
         ],
       ),
@@ -86,20 +103,24 @@ class _WeatherAppState extends State<WeatherApp> {
             width: double.infinity,
           ),
           Container(
-            color: isDarkTheme ? Colors.black38 : Colors.white.withOpacity(0.5),
+            height: double.infinity,
+            width: double.infinity,
+            color: widget.isDarkTheme
+                ? const Color.fromARGB(128, 0, 0, 0) // 0.5 * 255 = 128
+                : const Color.fromARGB(128, 180, 180, 180),
           ),
           Column(
             children: [
-              SizedBox(height: 140),
+              const SizedBox(height: 140),
               Container(
-                margin: EdgeInsets.only(left: 15),
+                margin: const EdgeInsets.only(left: 15),
                 child: Row(
                   children: List.generate(locationList.length, (i) {
                     return SliderDot(i == _currentPage);
                   }),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               Expanded(
                 child: PageView.builder(
                   controller: _pageController,

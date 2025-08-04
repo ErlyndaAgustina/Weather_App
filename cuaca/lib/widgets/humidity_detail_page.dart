@@ -13,14 +13,13 @@ class HumidityDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Humidity Details'),
+        title: const Text('Detail Kelembaban'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
       ),
       body: Stack(
         children: [
-          // Background image
           Image.asset(
             'assets/humidity.jpeg',
             fit: BoxFit.cover,
@@ -28,14 +27,14 @@ class HumidityDetailPage extends StatelessWidget {
             width: media.width,
           ),
 
-          // Dark overlay
           Container(
             height: media.height,
             width: media.width,
-            color: Colors.black.withOpacity(0.40),
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.white.withOpacity(0.3)
+                : Colors.black.withOpacity(0.3),
           ),
 
-          // Main content
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -46,7 +45,7 @@ class HumidityDetailPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: Colors.white38, width: 1.2),
                     ),
@@ -70,7 +69,11 @@ class HumidityDetailPage extends StatelessWidget {
                                 : Colors.white,
                             shadows: [
                               Shadow(
-                                color: Colors.black54,
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.white54
+                                    : Colors.black54,
                                 offset: Offset(2, 2),
                                 blurRadius: 4,
                               ),
@@ -79,7 +82,7 @@ class HumidityDetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Text(
-                          'Relative Humidity',
+                          'Kelembaban Relatif',
                           style: TextStyle(
                             fontSize: 22,
                             color:
@@ -91,8 +94,8 @@ class HumidityDetailPage extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         Text(
-                          'Humidity indicates the amount of water vapor in the air. '
-                          'High humidity can make the temperature feel warmer and affect comfort levels.',
+                          'Kelembapan menunjukkan jumlah uap air di udara.'
+                          'Kelembapan yang tinggi dapat membuat suhu terasa lebih hangat dan memengaruhi tingkat kenyamanan.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,

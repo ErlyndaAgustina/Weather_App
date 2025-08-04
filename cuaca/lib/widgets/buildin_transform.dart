@@ -35,7 +35,10 @@ class _CustomCarouselSliderState extends State<CustomCarouselSlider> {
               final bool isCenter = index == _currentIndex;
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 20,
+                ),
                 curve: Curves.easeInOut,
                 transform: Matrix4.identity()
                   ..scale(isCenter ? 1.0 : 0.9)

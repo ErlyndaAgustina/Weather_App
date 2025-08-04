@@ -13,14 +13,13 @@ class RainDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Rain Details'),
+        title: const Text('Detail Hujan'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
       ),
       body: Stack(
         children: [
-          // Background image
           Image.asset(
             'assets/rainbg.jpeg',
             fit: BoxFit.cover,
@@ -28,14 +27,14 @@ class RainDetailPage extends StatelessWidget {
             width: media.width,
           ),
 
-          // Semi-dark overlay
           Container(
             height: media.height,
             width: media.width,
-            color: Colors.black.withOpacity(0.5),
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.white.withOpacity(0.3)
+                : Colors.black.withOpacity(0.3),
           ),
 
-          // Foreground content
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -46,43 +45,61 @@ class RainDetailPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: Colors.white38),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.grain, size: 80, color: Colors.lightBlueAccent),
+                        const Icon(
+                          Icons.grain,
+                          size: 80,
+                          color: Colors.lightBlueAccent,
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           '$value%',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 56,
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                             shadows: [
-                              Shadow(color: Colors.black54, offset: Offset(2, 2), blurRadius: 4),
+                              Shadow(
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.white54
+                                    : Colors.black54,
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          'Chance of Rain',
+                        Text(
+                          'Kemungkinan Hujan',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Colors.white70,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: 30),
-                        const Text(
-                          'A higher percentage means a greater likelihood of rainfall. '
-                          'If it’s above 50%, you might want to carry an umbrella!',
+                        Text(
+                          'Persentase yang lebih tinggi berarti kemungkinan terjadinya hujan lebih besar.'
+                          'Jika di atas 50%, Anda mungkin perlu membawa payung!',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             height: 1.4,
                           ),
                         ),
@@ -92,7 +109,7 @@ class RainDetailPage extends StatelessWidget {
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );

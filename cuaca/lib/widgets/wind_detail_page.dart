@@ -13,14 +13,13 @@ class WindDetailPage extends StatelessWidget {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: const Text('Wind Details'),
+        title: const Text('Detail Angin'),
         backgroundColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
       ),
       body: Stack(
         children: [
-          // Background image
           Image.asset(
             'assets/wind.jpeg',
             fit: BoxFit.cover,
@@ -28,14 +27,14 @@ class WindDetailPage extends StatelessWidget {
             width: media.width,
           ),
 
-          // Overlay
           Container(
             height: media.height,
             width: media.width,
-            color: Colors.black.withOpacity(0.5),
+            color: Theme.of(context).brightness == Brightness.light
+                ? Colors.white.withOpacity(0.3)
+                : Colors.black.withOpacity(0.3),
           ),
 
-          // Content
           Center(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -46,43 +45,64 @@ class WindDetailPage extends StatelessWidget {
                   child: Container(
                     padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
+                      color: Colors.white.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(24),
                       border: Border.all(color: Colors.white38),
                     ),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Icon(Icons.air, size: 80, color: Colors.cyanAccent),
+                        const Icon(
+                          Icons.air,
+                          size: 80,
+                          color: Colors.cyanAccent,
+                        ),
                         const SizedBox(height: 16),
                         Text(
                           '$value km/h',
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 56,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             shadows: [
-                              Shadow(color: Colors.black54, offset: Offset(2, 2), blurRadius: 4),
+                              Shadow(
+                                color:
+                                    Theme.of(context).brightness ==
+                                        Brightness.light
+                                    ? Colors.white54
+                                    : Colors.black54,
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                              ),
                             ],
                           ),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          'Current Wind Speed',
+                        Text(
+                          'Kecepatan Angin',
                           style: TextStyle(
                             fontSize: 22,
-                            color: Colors.white70,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         const SizedBox(height: 30),
-                        const Text(
-                          'Wind speed affects how the weather feels. '
-                          'Strong winds can increase the chill factor or spread weather systems quickly.',
+                        Text(
+                          'Kecepatan angin memengaruhi bagaimana cuaca terasa. '
+                          'Angin kencang dapat meningkatkan faktor dingin atau menyebarkan sistem cuaca dengan cepat.',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 16,
-                            color: Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             height: 1.4,
                           ),
                         ),

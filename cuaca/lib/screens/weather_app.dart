@@ -25,13 +25,13 @@ class _WeatherAppState extends State<WeatherApp> {
 
   String _getBackgroundImage(String weatherType) {
     switch (weatherType) {
-      case 'Sunny':
+      case 'Cerah':
         return 'assets/sunny.jpg';
-      case 'Night':
+      case 'Malam':
         return 'assets/night.jpg';
-      case 'Rainy':
+      case 'Hujan':
         return 'assets/rainy.jpg';
-      case 'Cloudy':
+      case 'Berawan':
         return 'assets/cloudy.jpeg';
       default:
         return 'assets/sunny.jpg';
@@ -106,7 +106,7 @@ class _WeatherAppState extends State<WeatherApp> {
             height: double.infinity,
             width: double.infinity,
             color: widget.isDarkTheme
-                ? const Color.fromARGB(128, 0, 0, 0) // 0.5 * 255 = 128
+                ? const Color.fromARGB(128, 0, 0, 0)
                 : const Color.fromARGB(128, 180, 180, 180),
           ),
           Column(

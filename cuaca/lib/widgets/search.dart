@@ -6,14 +6,17 @@ import 'package:google_fonts/google_fonts.dart';
 class Search extends SearchDelegate<String> {
   @override
   List<Widget> buildActions(BuildContext context) {
-    return [
-      IconButton(
-        icon: Icon(Icons.clear),
-        onPressed: () {
-          query = '';
-        },
-      ),
-    ];
+    return query.isNotEmpty
+        ? [
+            IconButton(
+              icon: Icon(Icons.clear),
+              onPressed: () {
+                query = '';
+                showSuggestions(context);
+              },
+            ),
+          ]
+        : [];
   }
 
   @override
@@ -44,7 +47,6 @@ class Search extends SearchDelegate<String> {
     return _buildSearchList(suggestions, context);
   }
 
-  /// Reusable UI builder
   Widget _buildSearchList(List<WeatherLocation> list, BuildContext context) {
     return ListView.builder(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -61,20 +63,23 @@ class Search extends SearchDelegate<String> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(20),
               image: DecorationImage(
-                image: AssetImage(item.bgUrl), // harus ada bgUrl di model
+                image: AssetImage(item.bgUrl),
                 fit: BoxFit.cover,
               ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                /// Kota
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.location_on, color: Colors.white, size: 16),
+                        const Icon(
+                          Icons.location_on,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           item.city,
@@ -89,7 +94,6 @@ class Search extends SearchDelegate<String> {
                   ],
                 ),
 
-                /// Suhu dan Cuaca
                 Column(
                   children: [
                     Text(
@@ -116,7 +120,7 @@ class Search extends SearchDelegate<String> {
                           ),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               ],

@@ -13,6 +13,15 @@ class SingleWeather extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final location = locationList[index];
+    final List<Map<String, dynamic>> forecast = [
+      {'day': 'Minggu', 'icon': 'assets/rain.svg', 'temp': 17},
+      {'day': 'Senin', 'icon': 'assets/sun.svg', 'temp': 25},
+      {'day': 'Selasa', 'icon': 'assets/cloudy.svg', 'temp': 22},
+      {'day': 'Rabu', 'icon': 'assets/sun.svg', 'temp': 24},
+      {'day': 'Kamis', 'icon': 'assets/rain.svg', 'temp': 19},
+      {'day': 'Jum\'at', 'icon': 'assets/sun.svg', 'temp': 25},
+      {'day': 'Sabtu', 'icon': 'assets/cloudy.svg', 'temp': 20},
+    ];
 
     return SingleChildScrollView(
       child: Padding(
@@ -20,7 +29,6 @@ class SingleWeather extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            /// Bagian atas: kota, waktu
             SizedBox(height: MediaQuery.of(context).size.height * 0.05),
             Text(
               location.city,
@@ -38,8 +46,6 @@ class SingleWeather extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-
-            /// Cuaca dan suhu
             Center(
               child: Text(
                 location.temparature,
@@ -72,8 +78,6 @@ class SingleWeather extends StatelessWidget {
               ],
             ),
             SizedBox(height: 30),
-
-            /// Perkiraan Mingguan
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -95,15 +99,7 @@ class SingleWeather extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 10),
-                  ...[
-                    {'day': 'Minggu', 'icon': Icons.water_drop , 'temp': 17},
-                    {'day': 'Senin', 'icon': Icons.wb_cloudy, 'temp': 30},
-                    {'day': 'Selasa', 'icon': Icons.cloud, 'temp': 30},
-                    {'day': 'Rabu', 'icon': Icons.wb_cloudy, 'temp': 22},
-                    {'day': 'Kamis', 'icon': Icons.water_drop , 'temp': 19},
-                    {'day': 'Jum\'at', 'icon': Icons.wb_sunny, 'temp': 30},
-                    {'day': 'Sabtu', 'icon': Icons.filter_drama, 'temp': 25},
-                  ].map((data) {
+                  ...forecast.map((data) {
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 6),
                       child: Row(
@@ -120,8 +116,10 @@ class SingleWeather extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          Icon(
-                            data['icon'] as IconData,
+                          SvgPicture.asset(
+                            data['icon'] as String,
+                            width: 30,
+                            height: 30,
                             color:
                                 Theme.of(context).brightness == Brightness.light
                                 ? Colors.black
@@ -147,7 +145,6 @@ class SingleWeather extends StatelessWidget {
             ),
             const SizedBox(height: 40),
 
-            /// Divider
             Container(
               height: 2,
               color: Theme.of(context).brightness == Brightness.light
@@ -156,13 +153,12 @@ class SingleWeather extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            /// Wind, Rain, Humidity
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _buildDetailColumn(
                   context: context,
-                  label: 'Wind',
+                  label: 'Angin',
                   value: location.wind.toString(),
                   unit: 'km/h',
                   barColor: Colors.greenAccent,
@@ -177,7 +173,7 @@ class SingleWeather extends StatelessWidget {
                 ),
                 _buildDetailColumn(
                   context: context,
-                  label: 'Rain',
+                  label: 'Hujan',
                   value: location.rain.toString(),
                   unit: '%',
                   barColor: Colors.redAccent,
@@ -192,7 +188,7 @@ class SingleWeather extends StatelessWidget {
                 ),
                 _buildDetailColumn(
                   context: context,
-                  label: 'Humidity',
+                  label: 'Kelembaban',
                   value: location.humidity.toString(),
                   unit: '%',
                   barColor: Colors.blueAccent,
@@ -215,7 +211,6 @@ class SingleWeather extends StatelessWidget {
     );
   }
 
-  /// Komponen miniatur info
   Widget _buildDetailColumn({
     required BuildContext context,
     required String label,

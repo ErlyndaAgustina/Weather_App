@@ -4,35 +4,19 @@ Aplikasi Cuaca ini adalah proyek Flutter yang dirancang dengan tampilan antarmuk
 
 ## 🧩 Fitur Utama
 
-    - 🔍 Pencarian lokasi (dengan daftar kota seperti Kalipare, Sumberpucung, Kepanjen, Malang)
-    - 📆 Prakiraan cuaca mingguan (hari, ikon, dan suhu)
-    - 🌬️ Detail cuaca: Angin, Hujan, Kelembaban
-    - 🎨 Tema terang & gelap otomatis
-    - 🖼️ Background dinamis berdasarkan jenis cuaca
-    - 📱 Responsif untuk berbagai ukuran layar
-
-## 📂 Struktur Folder
-lib/
-├── models/
-│ └── weather_locations.dart
-├── screens/
-│ └── weather_app.dart
-├── widgets/
-│ ├── buildin_transform.dart
-│ ├── humidity_detail_page.dart
-| ├── rain_detail_page.dart
-│ ├── search.dart
-│ ├── single_weather.dart
-| ├── slider_dot.dart
-| ├── wind_detail_page.dart
-├── main.dart
+- 🔍 Pencarian lokasi (dengan daftar kota seperti Kalipare, Sumberpucung, Kepanjen, Malang)
+- 📆 Prakiraan cuaca mingguan (hari, ikon, dan suhu)
+- 🌬️ Detail cuaca: Angin, Hujan, Kelembaban
+- 🎨 Tema terang & gelap otomatis
+- 🖼️ Background dinamis berdasarkan jenis cuaca
+- 📱 Responsif untuk berbagai ukuran layar
 
 ## 🌈 Cuaca yang Didukung
 
-    - ☀️ Sunny
-    - 🌙 Night
-    - 🌧️ Rainy
-    - ☁️ Cloudy
+- ☀️ Sunny
+- 🌙 Night
+- 🌧️ Rainy
+- ☁️ Cloudy
 
 ▶️ Cara Menjalankan
 

@@ -9,6 +9,7 @@ class WeatherLocation {
   final int wind;
   final int rain;
   final int humidity;
+  final String bgUrl;
 
   WeatherLocation({
     required this.city,
@@ -19,6 +20,7 @@ class WeatherLocation {
     required this.wind,
     required this.rain,
     required this.humidity,
+    required this.bgUrl,
   });
 }
 
@@ -32,6 +34,7 @@ final locationList = [
     wind: 10,
     rain: 2,
     humidity: 10,
+    bgUrl: 'assets/night.jpg',
   ),
   WeatherLocation(
     city: 'Sumberpucung',
@@ -42,6 +45,7 @@ final locationList = [
     wind: 8,
     rain: 7,
     humidity: 82,
+    bgUrl: 'assets/cloudy.jpeg'
   ),
   WeatherLocation(
     city: 'Kepanjen',
@@ -52,6 +56,7 @@ final locationList = [
     wind: 5,
     rain: 15,
     humidity: 61,
+    bgUrl: 'assets/sunny.jpg',
   ),
   WeatherLocation(
     city: 'Malang',
@@ -62,5 +67,6 @@ final locationList = [
     wind: 20,
     rain: 70,
     humidity: 91,
+    bgUrl: 'assets/rainy.jpg'
   ),
 ];

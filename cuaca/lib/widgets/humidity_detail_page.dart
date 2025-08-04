@@ -1,3 +1,4 @@
+import 'dart:ui';
 import 'package:flutter/material.dart';
 
 class HumidityDetailPage extends StatelessWidget {
@@ -7,6 +8,8 @@ class HumidityDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final media = MediaQuery.of(context).size;
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -16,59 +19,94 @@ class HumidityDetailPage extends StatelessWidget {
         centerTitle: true,
       ),
       body: Stack(
-        fit: StackFit.expand,
         children: [
           // Background image
           Image.asset(
             'assets/humidity.jpeg',
             fit: BoxFit.cover,
+            height: media.height,
+            width: media.width,
           ),
 
-          // Overlay content
+          // Dark overlay
           Container(
-            color: Colors.black.withOpacity(0.5),
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 60),
-            child: Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Icon(Icons.water_drop, size: 100, color: Colors.white),
-                  const SizedBox(height: 20),
-                  Text(
-                    '$value%',
-                    style: const TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  const Text(
-                    'Relative Humidity',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.white70,
-                    ),
-                  ),
-                  const SizedBox(height: 40),
-                  Container(
-                    padding: const EdgeInsets.all(20),
+            height: media.height,
+            width: media.width,
+            color: Colors.black.withOpacity(0.40),
+          ),
+
+          // Main content
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(24),
+                child: BackdropFilter(
+                  filter: ImageFilter.blur(sigmaX: 12, sigmaY: 12),
+                  child: Container(
+                    padding: const EdgeInsets.all(30),
                     decoration: BoxDecoration(
                       color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(16),
-                      border: Border.all(color: Colors.white30),
+                      borderRadius: BorderRadius.circular(24),
+                      border: Border.all(color: Colors.white38, width: 1.2),
                     ),
-                    child: const Text(
-                      'Humidity represents the amount of water vapor in the air. '
-                      'Higher values can make the weather feel warmer than it is.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: Colors.white,
-                      ),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        const Icon(
+                          Icons.water_drop,
+                          size: 80,
+                          color: Colors.cyanAccent,
+                        ),
+                        const SizedBox(height: 16),
+                        Text(
+                          '$value%',
+                          style: TextStyle(
+                            fontSize: 56,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
+                            shadows: [
+                              Shadow(
+                                color: Colors.black54,
+                                offset: Offset(2, 2),
+                                blurRadius: 4,
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10),
+                        Text(
+                          'Relative Humidity',
+                          style: TextStyle(
+                            fontSize: 22,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 30),
+                        Text(
+                          'Humidity indicates the amount of water vapor in the air. '
+                          'High humidity can make the temperature feel warmer and affect comfort levels.',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
+                            height: 1.4,
+                          ),
+                        ),
+                      ],
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
             ),
           ),

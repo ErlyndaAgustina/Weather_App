@@ -1,16 +1,49 @@
-# cuaca
+# 🌤️ Aplikasi Cuaca - Flutter Weather UI
 
-A new Flutter project.
+Aplikasi Cuaca ini adalah proyek Flutter yang dirancang dengan tampilan antarmuka yang modern dan mendukung tema terang dan gelap. Aplikasi ini menampilkan informasi cuaca harian dan detail seperti kecepatan angin, kelembaban, dan peluang hujan, lengkap dengan ilustrasi SVG dan latar belakang bergambar sesuai kondisi cuaca.
 
-## Getting Started
+## 🧩 Fitur Utama
 
-This project is a starting point for a Flutter application.
+    - 🔍 Pencarian lokasi (dengan daftar kota seperti Kalipare, Sumberpucung, Kepanjen, Malang)
+    - 📆 Prakiraan cuaca mingguan (hari, ikon, dan suhu)
+    - 🌬️ Detail cuaca: Angin, Hujan, Kelembaban
+    - 🎨 Tema terang & gelap otomatis
+    - 🖼️ Background dinamis berdasarkan jenis cuaca
+    - 📱 Responsif untuk berbagai ukuran layar
 
-A few resources to get you started if this is your first Flutter project:
+## 📂 Struktur Folder
+lib/
+├── models/
+│ └── weather_locations.dart
+├── screens/
+│ └── weather_app.dart
+├── widgets/
+│ ├── buildin_transform.dart
+│ ├── humidity_detail_page.dart
+| ├── rain_detail_page.dart
+│ ├── search.dart
+│ ├── single_weather.dart
+| ├── slider_dot.dart
+| ├── wind_detail_page.dart
+├── main.dart
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🌈 Cuaca yang Didukung
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+    - ☀️ Sunny
+    - 🌙 Night
+    - 🌧️ Rainy
+    - ☁️ Cloudy
+
+▶️ Cara Menjalankan
+
+1. Clone repo ini:
+   ```bash
+   git clone https://github.com/username/flutter-cuaca.git
+   cd flutter-cuaca
+
+2. Jalankan perintah Flutter:
+   ```bash
+   flutter pub get
+   flutter run
+
+   

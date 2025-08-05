@@ -63,7 +63,10 @@ class RainDetailPage extends StatelessWidget {
                           style: TextStyle(
                             fontSize: 56,
                             fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                            color:
+                                Theme.of(context).brightness == Brightness.light
+                                ? Colors.black
+                                : Colors.white,
                             shadows: [
                               Shadow(
                                 color:
